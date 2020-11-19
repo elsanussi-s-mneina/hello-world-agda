@@ -3,12 +3,32 @@
  - Agda version 2.6.1
  - Agda standard library v1.3
 
+## Quick instructions for Mac OS Catalina
+Assuming you already installed brew, and cabal.
+For information on Brew, see:
+https://brew.sh/
+
+For information on Cabal, see:
+https://www.haskell.org/platform/ 
+
+
+```
+brew install agda
+mkdir -p ~/.agda
+echo /usr/local/lib/agda/standard-library.agda-lib >>~/.agda/libraries
+echo standard-library >>~/.agda/defaults
+cabal install --lib ieee754
+```
+Now you are ready to compile the code.
+
+
 ### How to get Agda version 2.6.1
 Go to the following web page: 
 
 https://agda.readthedocs.io/en/v2.6.1/getting-started/installation.html
 
 and follow the instructions
+
 
 ### How to get Agda standard library:
 Follow the instructions at:
@@ -18,21 +38,27 @@ https://github.com/agda/agda-stdlib/blob/master/notes/installation-guide.md
 ## How to setup the Agda standard library so that the compiler will find it.
 After you have downloaded and placed the uncompressed untarred version of the standard library in a location.
 
-If you are in a Unix like system: Go to ~/.agda  folder.
-If the folder does not exist, create the .agda folder.
-
-Place a file named "libraries" there.
-
-Put one line in that file. That line must be the path to the file whose extension is "agda-lib" located in the agda-stdlib-1.3 folder, which you recently downloaded.
-
-~/.cabal/bin/agda-stdlib-1.3/standard-library.agda-lib
-
-
-If you get stuck browse the documentation at 
+See documentation at 
 
 https://agda.readthedocs.io/en/v2.6.1/tools/package-system.html
 
-I wish it were easier, but it isn't because the Agda standard library does not ocome with Agda.
+I wish it were easier, but it isn't because the Agda standard library does not come with Agda.
+
+## Troubleshooting the IEEE Numeric problem
+If you encounter the following error when compiling:
+
+```
+s/Code/hello-world-agda/src/MAlonzo/RTE.hs:9:1: error:
+    Could not find module ‘Numeric.IEEE’
+    Use -v (or `:set -v` in ghci) to see a list of the files searched for.
+  |
+9 | import Numeric.IEEE ( IEEE(identicalIEEE, nan) )
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+```
+You need to install the ieee754 library.
+You can do so with the following command if cabal is installed.
+
+`cabal install --lib ieee754`
 
 ## How to compile:
 Run the following line at the terminal, and press enter:
